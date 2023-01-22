@@ -1,0 +1,50 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+    - id: black
+      name: Black Python code formatting
+      entry: black # block commit on fail
+      language: python
+      language_version: python3.8
+      types: [python]
+      args: [
+        # "--check",
+        "--diff",
+        "--line-length=100",
+        "--skip-string-normalization",
+        ]
+      fail_fast: true
+      verbose: true
+      exclude: ^migrations/
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.0
+    hooks:
+      - id: isort
+        name: Sorting import statements
+        entry: isort # block commit on fail
+        language: python
+        language_version: python3.8
+        args: [
+          # "--check-only",
+          "--diff",
+          "-l=88",
+          "--skip=migrations",
+          "--profile=black",
+          ]
+        fail_fast: true
+        verbose: true
+        exclude: ^migrations/
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+    - id: flake8
+      language: python
+      language_version: python3.8
+      entry: flake8 # block commit on fail
+      args: ["--max-line-length=100"]
+      fail_fast: true
+      verbose: true
+      exclude: ^migrations/
