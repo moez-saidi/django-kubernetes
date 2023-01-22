@@ -10,7 +10,7 @@ repos:
       types: [python]
       args: [
         # "--check",
-        "--diff",
+        # "--diff",
         "--line-length=100",
         "--skip-string-normalization",
         ]
@@ -28,8 +28,7 @@ repos:
         language_version: python3.8
         args: [
           # "--check-only",
-          "--diff",
-          "-l=88",
+          # "--diff",
           "--skip=migrations",
           "--profile=black",
           ]
