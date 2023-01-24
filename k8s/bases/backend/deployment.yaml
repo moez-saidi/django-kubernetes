@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        command:
+        - python
+        - manage.py
+        - runserver
+        - 0.0.0.0:8000
+        image: archiness/backend-kubernetes:0.0.2
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: backend-config
+        - configMapRef:
+            name: postgres-config
+        - secretRef:
+            name: postgres-credentials
+        - secretRef:
+            name: secret-key
+        resources: {}
+status: {}
