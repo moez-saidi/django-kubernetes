@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  DEBUG: "True"
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: dev

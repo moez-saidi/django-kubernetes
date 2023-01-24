@@ -14,6 +14,12 @@ from pathlib import Path
 
 import environ
 
+
+# Convert str to boolean
+def str_to_bool(s):
+    return s.lower() in ('true', '1', 't')
+
+
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
@@ -29,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = str_to_bool(env('DEBUG'))
 
 ALLOWED_HOSTS = []
 
