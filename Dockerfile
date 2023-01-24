@@ -19,3 +19,5 @@ RUN python3 -m pip install -r requirements.txt
 
 # Copy app files 
 COPY . .
+
+EXPOSE 8000
