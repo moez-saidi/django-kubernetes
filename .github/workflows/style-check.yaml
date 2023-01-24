@@ -1,0 +1,15 @@
+name: Style Check
+on: [push]
+jobs:
+  Check-Code-Style:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8']
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - run: pip install -r requirements-dev.txt
+    - run: pre-commit run --all-files
