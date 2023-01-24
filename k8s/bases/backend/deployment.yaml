@@ -24,7 +24,6 @@ spec:
         - runserver
         - 0.0.0.0:8000
         image: archiness/backend-kubernetes:0.0.2
-        imagePullPolicy: Never
         envFrom:
         - configMapRef:
             name: backend-config
