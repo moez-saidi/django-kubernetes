@@ -23,6 +23,7 @@ spec:
         - manage.py
         - runserver
         - 0.0.0.0:8000
+        - --settings=settings.settings.production
         image: archiness/backend-kubernetes:0.0.2
         envFrom:
         - configMapRef:
