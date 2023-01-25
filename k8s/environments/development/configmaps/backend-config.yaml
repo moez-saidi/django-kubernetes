@@ -1,6 +1,7 @@
 apiVersion: v1
 data:
   DEBUG: "True"
+  ENV: "DEV"
 kind: ConfigMap
 metadata:
   name: backend-config

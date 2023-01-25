@@ -1,6 +1,7 @@
 import environ
 
 from .base import (  # noqa: F401
+    API_PREFIX,
     AUTH_PASSWORD_VALIDATORS,
     DEFAULT_AUTO_FIELD,
     INSTALLED_APPS,
