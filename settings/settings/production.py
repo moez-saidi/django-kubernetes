@@ -27,6 +27,8 @@ def str_to_bool(s):
     return s.lower() in ('true', '1', 't')
 
 
+ENV = env('ENV')
+
 SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = str_to_bool(env('DEBUG'))
