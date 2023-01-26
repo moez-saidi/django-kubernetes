@@ -58,6 +58,9 @@ k create -f k8s/bases/postgres/deployment.yaml
 ```bash
 
 k create -f k8s/bases/backend/service.yaml
+k create -f k8s/bases/backend/service-account.yaml
+k create -f k8s/bases/backend/role.yaml
+k create -f k8s/bases/backend/role-binding.yaml
 k create -f k8s/bases/backend/deployment.yaml
 ```
 
