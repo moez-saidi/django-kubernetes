@@ -16,6 +16,8 @@ spec:
       labels:
         app: backend
     spec:
+      serviceAccountName: backend-service-account
+      automountServiceAccountToken: true
       containers:
       - name: backend
         command:
