@@ -16,7 +16,7 @@ def forbiden_exception_handler(method):
         try:
             return method(*args, **kwargs)
         except ApiException as api_exception:
-            return Response(api_exception, status=HTTP_400_BAD_REQUEST)
+            return Response(api_exception.__dict__, status=HTTP_400_BAD_REQUEST)
 
     return inner
 
