@@ -1,4 +1,6 @@
+from kubernetes.client.exceptions import ApiException
 from rest_framework.response import Response
+from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
 from cluster_management.kubernetes_utils.client import (
@@ -9,11 +11,22 @@ from cluster_management.kubernetes_utils.client import (
 )
 
 
+def forbiden_exception_handler(method):
+    def inner(*args, **kwargs):
+        try:
+            return method(*args, **kwargs)
+        except ApiException as api_exception:
+            return Response(api_exception, status=HTTP_400_BAD_REQUEST)
+
+    return inner
+
+
 class ListAllPodAPIView(APIView):
     """
     View to list all pods in all namespaces.
     """
 
+    @forbiden_exception_handler
     def get(self, request, format=None):
         """
         Return a list of pods.
@@ -26,6 +39,7 @@ class ListNamespacedPodAPIView(APIView):
     View to list  pods in a namespace.
     """
 
+    @forbiden_exception_handler
     def get(self, request, namespace, format=None):
         """
         Return a list of pods by namespace.
@@ -38,6 +52,7 @@ class ListAllDeploymentAPIView(APIView):
     View to list all deployments in all namespaces.
     """
 
+    @forbiden_exception_handler
     def get(self, request, format=None):
         """
         Return a list of deployments.
@@ -50,6 +65,7 @@ class ListNamespacedDeploymentAPIView(APIView):
     View to list  deployments in a namespace.
     """
 
+    @forbiden_exception_handler
     def get(self, request, namespace, format=None):
         """
         Return a list of deployments by namespace.
