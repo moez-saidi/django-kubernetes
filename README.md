@@ -1,9 +1,5 @@
 # django-kubernetes
-django-kubernetes is a platform that will deploy containerized applications across multiple hosts. It provides basic mechanisms for deployment, maintenance, and scaling of applications using the power of kubernetes under the hood.
-
-This is primarily an educational project that will demonstrate the ability to work with K8 both in CLI and with the python client.
-
-For now, it will serve (deploy) static applications like AWS S3 buckets and nginx.
+Deploy Django project using Kubernetes
 
 # SETUP
 
