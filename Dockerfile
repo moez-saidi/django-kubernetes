@@ -14,8 +14,8 @@ RUN apt-get upgrade -y
 
 # Install app dependencies
 RUN pip install --upgrade pip
-COPY requirements.txt .
-RUN python3 -m pip install -r requirements.txt
+COPY requirements.txt requirements-prod.txt ./
+RUN python3 -m pip install -r requirements-prod.txt
 
 # Copy app files 
 COPY . .
