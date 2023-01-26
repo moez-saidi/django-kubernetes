@@ -1,8 +1,17 @@
 from django.conf import settings
 from kubernetes import client, config
 
-config.load_kube_config()
+from settings.utils import ENVS
 
+
+def load_k8s_config():
+    if settings.ENV == ENVS.PROD:
+        config.load_incluster_config()
+        return
+    config.load_kube_config()
+
+
+load_k8s_config()
 v1 = client.CoreV1Api()
 apps_v1 = client.AppsV1Api()
 api = client.ApiClient()
