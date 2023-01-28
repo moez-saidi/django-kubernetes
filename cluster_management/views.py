@@ -22,11 +22,13 @@ def forbiden_exception_handler(method):
 
 
 class GenericK8sAPIView(APIView):
-    k8s_function = None
+    @staticmethod
+    def cluster_function(**kwargs):
+        raise NotImplementedError("Subclasses should implement cluster_function")
 
     @forbiden_exception_handler
     def get(self, request, **kwargs):
-        return Response(self.k8s_function())
+        return Response(self.__class__.cluster_function(**kwargs))
 
 
 class ListAllPodAPIView(GenericK8sAPIView):
@@ -34,7 +36,9 @@ class ListAllPodAPIView(GenericK8sAPIView):
     View to list all pods in all namespaces.
     """
 
-    k8s_function = get_pods
+    @staticmethod
+    def cluster_function(**kwargs):
+        return get_pods()
 
 
 class ListNamespacedPodAPIView(GenericK8sAPIView):
@@ -42,7 +46,9 @@ class ListNamespacedPodAPIView(GenericK8sAPIView):
     View to list  pods in a namespace.
     """
 
-    k8s_function = get_pods_by_namespace
+    @staticmethod
+    def cluster_function(**kwargs):
+        return get_pods_by_namespace(namespace=kwargs['namespace'])
 
 
 class ListAllDeploymentAPIView(GenericK8sAPIView):
@@ -50,7 +56,9 @@ class ListAllDeploymentAPIView(GenericK8sAPIView):
     View to list all deployments in all namespaces.
     """
 
-    k8s_function = get_deployments
+    @staticmethod
+    def cluster_function(**kwargs):
+        return get_deployments()
 
 
 class ListNamespacedDeploymentAPIView(GenericK8sAPIView):
@@ -58,4 +66,6 @@ class ListNamespacedDeploymentAPIView(GenericK8sAPIView):
     View to list deployments in a namespace.
     """
 
-    k8s_function = get_deployments_by_namespace
+    @staticmethod
+    def cluster_function(**kwargs):
+        return get_deployments_by_namespace(namespace=kwargs['namespace'])

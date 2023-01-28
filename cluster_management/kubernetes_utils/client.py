@@ -20,8 +20,8 @@ default_namespace = settings.ENV.lower()
 
 
 def convert_to_json(function):
-    def wrapper(*args):
-        return api.sanitize_for_serialization(function(*args))
+    def wrapper(*args, **kwargs):
+        return api.sanitize_for_serialization(function(*args, **kwargs))
 
     return wrapper
 
