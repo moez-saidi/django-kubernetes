@@ -21,41 +21,53 @@ def forbiden_exception_handler(method):
     return inner
 
 
-class GenericK8sAPIView(APIView):
-    k8s_function = None
-
-    @forbiden_exception_handler
-    def get(self, request, **kwargs):
-        return Response(self.k8s_function())
-
-
-class ListAllPodAPIView(GenericK8sAPIView):
+class ListAllPodAPIView(APIView):
     """
     View to list all pods in all namespaces.
     """
 
-    k8s_function = get_pods
+    @forbiden_exception_handler
+    def get(self, request, format=None):
+        """
+        Return a list of pods.
+        """
+        return Response(get_pods())
 
 
-class ListNamespacedPodAPIView(GenericK8sAPIView):
+class ListNamespacedPodAPIView(APIView):
     """
     View to list  pods in a namespace.
     """
 
-    k8s_function = get_pods_by_namespace
+    @forbiden_exception_handler
+    def get(self, request, namespace, format=None):
+        """
+        Return a list of pods by namespace.
+        """
+        return Response(get_pods_by_namespace(namespace))
 
 
-class ListAllDeploymentAPIView(GenericK8sAPIView):
+class ListAllDeploymentAPIView(APIView):
     """
     View to list all deployments in all namespaces.
     """
 
-    k8s_function = get_deployments
+    @forbiden_exception_handler
+    def get(self, request, format=None):
+        """
+        Return a list of deployments.
+        """
+        return Response(get_deployments())
 
 
-class ListNamespacedDeploymentAPIView(GenericK8sAPIView):
+class ListNamespacedDeploymentAPIView(APIView):
     """
-    View to list deployments in a namespace.
+    View to list  deployments in a namespace.
     """
 
-    k8s_function = get_deployments_by_namespace
+    @forbiden_exception_handler
+    def get(self, request, namespace, format=None):
+        """
+        Return a list of deployments by namespace.
+        """
+        return Response(get_deployments_by_namespace(namespace))

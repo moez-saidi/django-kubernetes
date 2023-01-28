@@ -42,5 +42,5 @@ def get_pods_by_namespace(namespace=default_namespace):
 
 
 @convert_to_json
-def get_pods():
-    return v1.list_pod_for_all_namespaces()
+def get_pods(namespace=default_namespace):
+    return v1.list_namespaced_pod(namespace=namespace)
