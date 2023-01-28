@@ -20,8 +20,8 @@ default_namespace = settings.ENV.lower()
 
 
 def convert_to_json(function):
-    def wrapper(*args):
-        return api.sanitize_for_serialization(function(*args))
+    def wrapper(*args, **kwargs):
+        return api.sanitize_for_serialization(function(*args, **kwargs))
 
     return wrapper
 
@@ -42,5 +42,5 @@ def get_pods_by_namespace(namespace=default_namespace):
 
 
 @convert_to_json
-def get_pods(namespace=default_namespace):
-    return v1.list_namespaced_pod(namespace=namespace)
+def get_pods():
+    return v1.list_pod_for_all_namespaces()
